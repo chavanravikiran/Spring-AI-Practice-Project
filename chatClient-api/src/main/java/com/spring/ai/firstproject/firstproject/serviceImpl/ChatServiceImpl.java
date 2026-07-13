@@ -50,7 +50,7 @@ public class ChatServiceImpl implements ChatService {
 				chatClient
 				.prompt(query)
 				.call()
-				.entity(new ParameterizedTypeReference<List<Tutorial>>() {
+				.entity(new ParameterizedTypeReference<List<Tutorial>>() {//when return data in multiple list then use ParameterizedTypeReference
 				});
 
 		System.out.println(tutorials);
