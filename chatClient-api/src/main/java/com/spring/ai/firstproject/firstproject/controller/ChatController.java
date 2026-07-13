@@ -1,0 +1,55 @@
+package com.spring.ai.firstproject.firstproject.controller;
+
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.ollama.OllamaChatModel;
+import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/")
+public class ChatController {
+	
+//	When Single ChatClient
+//	private ChatClient chatClient;
+	
+//	When single chatModel Use
+//	public ChatController(ChatClient.Builder builder) {
+//		this.chatClient = builder.build();
+//	}
+	
+//	openAiChatClient
+	private ChatClient openAiChatClient;
+	
+	//ollamaAiChatClient
+	private ChatClient ollamaAiChatClient;
+
+	//when Multiple ChatClient/chatModel use openAiChatClient and OllamaAiChatClient
+//	public ChatController(OpenAiChatModel openAiChatModel , OllamaChatModel ollamaChatModel) {
+//		this.openAiChatClient = ChatClient.builder(openAiChatModel).build();
+//		this.ollamaAiChatClient = ChatClient.builder(ollamaChatModel).build();
+//	}
+	
+	
+	public ChatController(@Qualifier("openAiChatClient") ChatClient openAiChatClient, @Qualifier("ollamaChatClient") ChatClient ollamaChatClient) {
+		this.openAiChatClient = openAiChatClient;
+		this.ollamaAiChatClient = ollamaChatClient;
+	}
+	
+	@GetMapping("/chat")
+	public ResponseEntity<String> chat(@RequestParam(value = "q",required = true) String q){
+		System.out.println("-=---------->"+q);
+		
+//		When Single ChatClient
+//		var resultResponse = chatClient.prompt(q).call().content();
+		
+//		When multiple ChatClient Used
+		var resultResponse = openAiChatClient.prompt(q).call().content();
+		return ResponseEntity.ok(resultResponse);
+		
+	}
+}
