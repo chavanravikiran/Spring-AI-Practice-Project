@@ -1,9 +1,13 @@
 package com.spring.ai.firstproject.firstproject.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import com.spring.ai.firstproject.firstproject.entity.Tutorial;
@@ -18,6 +22,9 @@ public class ChatServiceImpl implements ChatService {
 		this.chatClient = chatClient.build();
 	}
 
+	 @Value("classpath:/prompts/userPrompts-message.st")
+	 private Resource userPrompt;
+	 
 	@Override
 	public String chat(String query) {
 
@@ -57,6 +64,47 @@ public class ChatServiceImpl implements ChatService {
 
 		return tutorials;
 
+	}
+
+	@Override
+	public String promptTemplate(String query) {
+		
+		Prompt prompt = new Prompt(query);
+		
+		String result = chatClient
+		.prompt(query)
+		.user(query)
+		.system("Give me in dotNet")// provide more specific prompt
+		.call()
+		.content();
+		
+		return result;
+	}
+
+	@Override
+	public String dynamicQueryPrompt(String query) {
+		String dynamicVar = "As an expert in coding and programing.Always write program in java. now reply for this question: {keyQuery}";
+		
+		String result = chatClient
+				.prompt()
+				.user(x->x.text(dynamicVar).param("keyQuery", query))
+				.call()
+				.content();
+				
+		return result;
+	}
+
+	@Override
+	public String fluentPrompt(String query) {
+		String result = chatClient.prompt().user(x->x.text(userPrompt).params(
+				"name", "Ravikiran",
+                "technology", "Spring AI",
+                "experience", 3,
+                "question", "Explain PromptTemplate"
+		))
+		.call()
+		.content();
+		return result;
 	}
 
 }

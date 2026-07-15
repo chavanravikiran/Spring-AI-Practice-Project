@@ -12,5 +12,11 @@ public interface ChatService {
 
 	List<Tutorial> listOfEntityResponse(String query);
 
+	String promptTemplate(String query);
+
+	String dynamicQueryPrompt(String query);
+
+	String fluentPrompt(String query);
+
 }
 

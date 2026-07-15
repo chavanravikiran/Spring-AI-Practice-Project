@@ -82,5 +82,18 @@ public class ChatController {
 		return ResponseEntity.ok(chatService.listOfEntityResponse(query));
 	}
 	
+	@GetMapping("/promptTemplate")
+	public ResponseEntity<String> promptTemplate(@RequestParam String query){
+		return ResponseEntity.ok(chatService.promptTemplate(query));
+	}
 	
+	@GetMapping("/dynamicQueryPrompt")
+	public ResponseEntity<String> dynamicQueryPrompt(@RequestParam String query){
+		return ResponseEntity.ok(chatService.dynamicQueryPrompt(query));
+	}
+	 
+	@GetMapping("/fluentPrompt")
+	public ResponseEntity<String> fluentPrompt(@RequestParam String query){
+		return ResponseEntity.ok(chatService.fluentPrompt(query));
+	}
 }
