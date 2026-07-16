@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SafeGuardAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import com.spring.ai.firstproject.firstproject.entity.Tutorial;
 import com.spring.ai.firstproject.firstproject.service.ChatService;
+
+import reactor.core.publisher.Flux;
 
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -105,4 +109,45 @@ public class ChatServiceImpl implements ChatService {
 		return result;
 	}
 
+	//Advisor Type-
+//	SimpleLoggerAdvisor
+//	ChatMemoryAdvsior
+//	PromptChatMemoryAdvisor
+//	SafeGardAdvisor
+//	MessaageChatMemoryAdvisor
+	
+//	below is SimpleLoggerAdvisor Example
+	@Override
+	public String simpleLoggerAdvisor(String query) {
+		String result = chatClient.prompt()
+		.advisors(new SimpleLoggerAdvisor())
+		.user(x->x.text("Explain 2 Example in Ruby Language"))
+		.call()
+		.content();
+		
+		return result;
+	}
+
+	@Override
+	public String safeGardAdvisor(String query) {
+		
+		String result = chatClient.prompt(query)
+				.advisors(new SafeGuardAdvisor(List.of("hack","virus","block","malware")))
+				.call()
+				.content();
+		
+		return result;
+	}
+
+	//Halu halu data streaming krto data
+	@Override
+	public Flux<String> streamingConcept(String query) {
+		Flux<String> result = chatClient.prompt()
+		.user(query)
+		.stream()
+		.content();
+		return result;
+	}
+
 }
+

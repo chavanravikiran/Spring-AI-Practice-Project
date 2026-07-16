@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.ai.firstproject.firstproject.entity.Tutorial;
 import com.spring.ai.firstproject.firstproject.service.ChatService;
 
+import reactor.core.publisher.Flux;
+
 @RestController
 @RequestMapping("/")
 public class ChatController {
@@ -95,5 +97,20 @@ public class ChatController {
 	@GetMapping("/fluentPrompt")
 	public ResponseEntity<String> fluentPrompt(@RequestParam String query){
 		return ResponseEntity.ok(chatService.fluentPrompt(query));
+	}
+	
+	@GetMapping("simpleLoggerAdvisor")
+	public ResponseEntity<String> simpleLoggerAdvisor(@RequestParam String query){
+		return ResponseEntity.ok(chatService.simpleLoggerAdvisor(query));
+	}
+	
+	@GetMapping("safeGardAdvisor")
+	public ResponseEntity<String> safeGardAdvisor(@RequestParam String query){
+		return ResponseEntity.ok(chatService.safeGardAdvisor(query));
+	}
+	
+	@GetMapping("stream-chat")
+	public ResponseEntity<Flux<String>>streamingConcept(@RequestParam String query){
+		return ResponseEntity.ok(chatService.streamingConcept(query));
 	}
 }
