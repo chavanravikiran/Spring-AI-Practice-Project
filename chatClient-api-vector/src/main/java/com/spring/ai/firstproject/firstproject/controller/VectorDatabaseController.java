@@ -26,4 +26,12 @@ public class VectorDatabaseController {
         		vectorDatabaseService.chatTemplate(userId, query));
     }
 
+    //No need to write manual prompts Spring AI do automatic |QuestionAnswerAdvisor in detail Spring AI
+    @GetMapping("/questionAnswerAdvsiorPrompt")
+    public ResponseEntity<String> questionAnswerAdvsiorPrompt(
+    		@RequestHeader("userId") String userId,
+            @RequestParam String query) {
+
+        return ResponseEntity.ok(vectorDatabaseService.questionAnswerAdvsiorPrompt(userId, query));
+    }
 }

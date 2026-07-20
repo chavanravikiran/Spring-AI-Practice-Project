@@ -1,6 +1,7 @@
 package com.spring.ai.firstproject.firstproject.serviceImpl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +54,46 @@ public class VectorDatabaseServiceImpl implements VectorDatabaseService{
 				.user(us->us.text(this.userMessage).param("query", query))
 				.call()
 				.content();
+	}
+
+	@Override
+	public String questionAnswerAdvsiorPrompt(String userId, String query) {
+//		return this.chatClient
+//				.prompt()
+////				.advisors(QuestionAnswerAdvisor.builder(vectorStore).build())
+//				.user(query)
+//		        .call()
+//		        .conent();
+		
+//		Jr hi ".advisors(QuestionAnswerAdvisor.builder(vectorStore).build())"
+//		jr chali asti tr khalche lihaichi garaj nasti .
+		SearchRequest searchRequest = SearchRequest.builder()
+		        .query(query)
+		        .topK(5)
+		        .similarityThreshold(0.6)
+		        .build();
+
+		List<Document> documents = vectorStore.similaritySearch(searchRequest);
+
+		String context = documents.stream()
+		        .map(Document::getText)
+		        .collect(Collectors.joining("\n"));
+
+		return chatClient
+		        .prompt()
+		        .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, userId))
+		        .system(system -> system.text("""
+		            Answer only using the following context.
+
+		            Context:
+		            {documents}
+
+		            If the answer is not present, say "I don't know."
+		            """)
+		            .param("documents", context))
+		        .user(query)
+		        .call()
+		        .content();
 	}
 
 }
