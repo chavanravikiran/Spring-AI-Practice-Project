@@ -1,0 +1,2 @@
+
+docker exec -it postgres-vector-db psql -U r -d spring_ai_project
