@@ -4,4 +4,6 @@ public interface VectorDatabaseService {
 
 	String chatTemplate(String userId, String query);
 
+	String questionAnswerAdvsiorPrompt(String userId, String query);
+
 }
