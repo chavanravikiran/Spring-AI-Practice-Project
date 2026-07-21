@@ -8,6 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.document.Document;
+import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
+import org.springframework.ai.rag.generation.augmentation.ContextualQueryAugmenter;
+import org.springframework.ai.rag.preretrieval.query.expansion.MultiQueryExpander;
+import org.springframework.ai.rag.preretrieval.query.transformation.RewriteQueryTransformer;
+import org.springframework.ai.rag.retrieval.join.ConcatenationDocumentJoiner;
+import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
@@ -95,5 +101,68 @@ public class VectorDatabaseServiceImpl implements VectorDatabaseService{
 		        .call()
 		        .content();
 	}
+
+	@Override
+	public String retrievalAugmentationAdvisor(String userId, String query) {
+		var advisor = RetrievalAugmentationAdvisor.builder()
+	            .documentRetriever(
+	                    VectorStoreDocumentRetriever.builder()
+	                            .vectorStore(vectorStore)
+	                            .similarityThreshold(0.6)
+	                            .topK(5)
+	                            .build())
+	            .build();
+		
+		return chatClient.prompt(query)
+	            .advisors(advisor)
+	            .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, userId))
+	            .call()
+	            .content();
+	}
+
+	@Override
+	public String getResponseFromAdvRAG(String query,String userId) {
+		
+		var advisor = RetrievalAugmentationAdvisor.builder()
+					//Pre Retrieval Module
+					.queryTransformers(
+							RewriteQueryTransformer.builder()
+							.chatClientBuilder(chatClient.mutate().clone())
+							.build()
+						)
+					.queryExpander(MultiQueryExpander.builder().chatClientBuilder(chatClient.mutate().clone()).build())
+					//Retrieval Module
+					.documentRetriever(
+							VectorStoreDocumentRetriever.builder()
+							.vectorStore(vectorStore)
+							.topK(3)
+							.similarityThreshold(0.5)
+							.build()
+						)
+					//Post Retrieval Module
+					.documentJoiner(new ConcatenationDocumentJoiner())
+					
+					.queryAugmenter(ContextualQueryAugmenter.builder().build())
+				.build();
+		
+		//Actual Call to LLM
+//		return chatClient
+//				.prompt(query)
+//				.advisors(advisor)
+//				 .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, userId))
+//				.call()
+//				.content();
+		
+		return chatClient
+		        .prompt(query)
+		        .advisors(a -> {
+		            a.param(ChatMemory.CONVERSATION_ID, userId);
+//		            a.advisor(advisor);
+		        })
+		        .call()
+		        .content();
+	}
+	
+	
 
 }

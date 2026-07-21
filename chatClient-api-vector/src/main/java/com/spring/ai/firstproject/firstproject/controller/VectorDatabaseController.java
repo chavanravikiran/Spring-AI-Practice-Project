@@ -1,5 +1,6 @@
 package com.spring.ai.firstproject.firstproject.controller;
 
+import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,5 +34,19 @@ public class VectorDatabaseController {
             @RequestParam String query) {
 
         return ResponseEntity.ok(vectorDatabaseService.questionAnswerAdvsiorPrompt(userId, query));
+    }
+    
+    @GetMapping("/retrievalAugmentationAdvisor")
+    public ResponseEntity<String> retrievalAugmentationAdvisor(
+    		@RequestHeader("userId") String userId,
+            @RequestParam String query) {
+    	
+        return ResponseEntity.ok(vectorDatabaseService.retrievalAugmentationAdvisor(userId, query));
+    }
+    
+    @GetMapping("/getResponseFromAdvRAG")
+    public ResponseEntity<String> getResponseFromAdvRAG(@RequestParam("query") String query,
+    		@RequestHeader("userId") String userId){
+    	return ResponseEntity.ok(vectorDatabaseService.getResponseFromAdvRAG(query,userId));
     }
 }
