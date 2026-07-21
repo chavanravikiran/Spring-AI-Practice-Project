@@ -6,4 +6,8 @@ public interface VectorDatabaseService {
 
 	String questionAnswerAdvsiorPrompt(String userId, String query);
 
+	String retrievalAugmentationAdvisor(String userId, String query);
+
+	String getResponseFromAdvRAG(String query,String userId);
+
 }
