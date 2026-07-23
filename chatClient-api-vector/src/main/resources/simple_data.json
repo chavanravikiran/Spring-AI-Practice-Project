@@ -1,0 +1,26 @@
+{
+  "name": "book_ordering",
+  "description": "Structured answer for a book to order",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "The title of the book"
+      },
+      "author": {
+        "type": "string",
+        "description": "The author of the book"
+      },
+      "ref_num": {
+        "type": "string",
+        "description": "The ISBN of the book"
+      },
+      "price": {
+        "type": "number",
+        "description": "The price of the book"
+      }
+    },
+    "required": ["title", "author", "ref_num", "price"]
+  }
+}

@@ -12,6 +12,7 @@ import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.rag.generation.augmentation.ContextualQueryAugmenter;
 import org.springframework.ai.rag.preretrieval.query.expansion.MultiQueryExpander;
 import org.springframework.ai.rag.preretrieval.query.transformation.RewriteQueryTransformer;
+import org.springframework.ai.rag.preretrieval.query.transformation.TranslationQueryTransformer;
 import org.springframework.ai.rag.retrieval.join.ConcatenationDocumentJoiner;
 import org.springframework.ai.rag.retrieval.search.VectorStoreDocumentRetriever;
 import org.springframework.ai.vectorstore.SearchRequest;
@@ -128,7 +129,8 @@ public class VectorDatabaseServiceImpl implements VectorDatabaseService{
 					.queryTransformers(
 							RewriteQueryTransformer.builder()
 							.chatClientBuilder(chatClient.mutate().clone())
-							.build()
+							.build(),
+							TranslationQueryTransformer.builder().chatClientBuilder(chatClient.mutate().clone()).targetLanguage("english").build()
 						)
 					.queryExpander(MultiQueryExpander.builder().chatClientBuilder(chatClient.mutate().clone()).build())
 					//Retrieval Module
