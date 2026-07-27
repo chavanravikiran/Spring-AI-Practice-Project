@@ -11,6 +11,8 @@ import org.springframework.core.io.Resource;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +42,17 @@ public class AiService {
 				.content();
 		
 		
+	}
+	
+	public Flux<String> streamResponseFromAssistant(String query,String conversationId){
+		return this.chatClient
+				.prompt()
+				.advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
+				//multiple tools calling
+				.tools(ticketDatabaseTool,emailTool)
+				.system(systemPromptResource)
+				.user(query)
+				.stream()
+				.content();
 	}
 }
