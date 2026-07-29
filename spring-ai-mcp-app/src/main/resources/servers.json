@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "C:/Program Files/nodejs/npx.cmd",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Ravikiran/Practice_Projects/Spring AI/mcp_dummy1",
+        "/Ravikiran/Practice_Projects/Spring AI/mcp_dummy2"
+      ]
+    }
+  }
+}

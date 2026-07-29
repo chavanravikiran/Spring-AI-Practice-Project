@@ -39,6 +39,6 @@ public class AudioController {
 	
 	@PostMapping("/speechToText")
 	public String speechToText(@RequestParam("audioFile") MultipartFile multipartFile){
-		return audioService.speechToText(multipartFile);
+		return audioService.convertAudioToTextWithOptions(multipartFile.getResource());
 	}
 }
