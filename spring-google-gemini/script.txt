@@ -1,0 +1,4 @@
+Create GenAi Api Key -->
+	https://aistudio.google.com/api-keys
+	Key=AQ.Ab8RN6KdQzj31ozZ00Rp10ueSKDWPxJI6BNTSk9FDDwpnYsU7A	
+	
