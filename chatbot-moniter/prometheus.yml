@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s
+
+scrape_config:
+  - job_name: simple-chatbot-monitor-app
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+        - host.docker.interval:9206
