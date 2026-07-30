@@ -1,0 +1,938 @@
+{
+  "info": {
+    "_postman_id": "99467474-6a38-44c1-bcf8-d51cb25823c3",
+    "name": "Spring AI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51304476",
+    "_collection_link": "https://go.postman.co/collection/51304476-99467474-6a38-44c1-bcf8-d51cb25823c3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Spring AI",
+      "item": [
+        {
+          "name": "chat",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/chat?q=provide spring AI Related Questions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "chat"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "provide spring AI Related Questions"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "generate Prompt Template Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/promptTemplate?query=provide prime number 1 to 100",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "promptTemplate"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "provide prime number 1 to 100"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User And System Prompt",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/userAndSystemPrompt?query=tell me about virat kohli",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "userAndSystemPrompt"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "tell me about virat kohli"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Generate And Return In Entity Prompt",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/generatePromptInEntity?query=tell me about virat kohli?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "generatePromptInEntity"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "tell me about virat kohli?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "generate List Of Prompt In Entity",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/generateListOfPromptInEntity?query=best 5 my nearest place for one day trip",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "generateListOfPromptInEntity"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "best 5 my nearest place for one day trip"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "dynamic Query Prompt",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/dynamicQueryPrompt?query=provide prime number 1 to 100",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "dynamicQueryPrompt"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "provide prime number 1 to 100"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Simple Logger Advisor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/simpleLoggerAdvisor?query=provide sum of two number?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "simpleLoggerAdvisor"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "provide sum of two number?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Fluent Prompt Template Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/fluentPrompt?query=What is PromptTemplate in Spring AI?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "fluentPrompt"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "What is PromptTemplate in Spring AI?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Safe Gard Advisor",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/safeGardAdvisor?query=throtaling and debousing?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "safeGardAdvisor"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "throtaling and debousing?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Streaming Concept",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/stream-chat?query=provide spring AI topics list?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "stream-chat"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "provide spring AI topics list?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Memory",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/stream-chat?query=provide spring AI topics list?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "stream-chat"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "provide spring AI topics list?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Memory Session",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "userId",
+                "value": "ravi123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:9204/memory?conversationId=102&query=what is my name?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "memory"
+              ],
+              "query": [
+                {
+                  "key": "conversationId",
+                  "value": "102"
+                },
+                {
+                  "key": "query",
+                  "value": "what is my name?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Memory Session 1",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "userId",
+                "value": "ravi123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:9204/memory-session?query=my name is ravikiran",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "memory-session"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "my name is ravikiran"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Data Dump in Maria DB",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/data-dump",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "data-dump"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Vector Database Load Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "userId",
+                "value": "ravi123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:9204/memory?conversationId=102&query=what is my name?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "memory"
+              ],
+              "query": [
+                {
+                  "key": "conversationId",
+                  "value": "102"
+                },
+                {
+                  "key": "query",
+                  "value": "what is my name?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "No need to write manual prompts Spring AI do automatic QuestionAnswerAdvisor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "userId",
+                "value": "ravi123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:9204/questionAnswerAdvsiorPrompt?query=kafka is asynchronous or synchronous?yes or no",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "questionAnswerAdvsiorPrompt"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "kafka is asynchronous or synchronous?yes or no"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieval Augmentation Advisor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "userId",
+                "value": "ravi123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:9204/questionAnswerAdvsiorPrompt?query=kafka is asynchronous or synchronous?yes or no",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "questionAnswerAdvsiorPrompt"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "kafka is asynchronous or synchronous?yes or no"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Response From Advance RAG",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "userId",
+                "value": "ravi123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:9204/getResponseFromAdvRAG?query=tell me about n8n?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "getResponseFromAdvRAG"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "tell me about n8n?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Json Data Load",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/jsonDataLoad",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "jsonDataLoad"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Json Data Load Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/pdfDataLoad",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "pdfDataLoad"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "tool chat test",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9205/chat-tool?query=java default port",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9205",
+              "path": [
+                "chat-tool"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "java default port"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Weather Tool Calling",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9205/chat-tool?query=provide me details of waether on pune",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9205",
+              "path": [
+                "chat-tool"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "provide me details of waether on pune"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Reponse-HelpDesk",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "user1245",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "this is my given System is displaying a Blue Screen of Death (BSOD) during startup and is unable to boot into Windows. Multiple restart attempts have not resolved the issue. Impact: Unable to access the operating system. User cannot perform any business activities.",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9206/api/v1/helpdesk/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "helpdesk",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get Stream Reponse-HelpDesk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello Dear",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9206/api/v1/helpdesk/stream",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "helpdesk",
+                "stream"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Audio to Text Generation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello Dear"
+            },
+            "url": {
+              "raw": "http://localhost:9206/api/v1/audio/transcription",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "audio",
+                "transcription"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "transcription-with-options",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello Dear"
+            },
+            "url": {
+              "raw": "http://localhost:9206/api/v1/audio/transcription-with-options",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "audio",
+                "transcription-with-options"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Multi-part Speech To Text",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello Dear"
+            },
+            "url": {
+              "raw": "http://localhost:9206/api/v1/audio/speechToText",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "audio",
+                "speechToText"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "spring-google-gemini",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello Dear"
+            },
+            "url": {
+              "raw": "http://localhost:9206/ai?prompt=provide spring ai concept list",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "ai"
+              ],
+              "query": [
+                {
+                  "key": "prompt",
+                  "value": "provide spring ai concept list",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "MCP Client Test",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "conversationId",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "Hello Dear"
+            },
+            "url": {
+              "raw": "http://localhost:9206/ai/mcp?query=why MCP Client is use in Spring AI?",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "ai",
+                "mcp"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "why MCP Client is use in Spring AI?"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Image Generation",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9206/api/images/generate?prompt=Boy playing cricket in ground",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "images",
+                "generate"
+              ],
+              "query": [
+                {
+                  "key": "prompt",
+                  "value": "Boy playing cricket in ground"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Spring Ai Moniter",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9206/api/v1/ai?query=Hello",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "ai"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Hello",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Spring Ai-Monitor-User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9206/api/v1/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9206",
+              "path": [
+                "api",
+                "v1",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Json Data Load",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:9204/jsonDataLoad",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "9204",
+              "path": [
+                "jsonDataLoad"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
