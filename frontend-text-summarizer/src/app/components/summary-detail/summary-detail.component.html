@@ -1,0 +1,167 @@
+<div class="detail-container">
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner-large"></div>
+      <p>Loading summary...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error() && !isLoading()) {
+    <div class="error-state">
+      <div class="error-icon">⚠️</div>
+      <h3>Error Loading Summary</h3>
+      <p>{{ error() }}</p>
+      <div class="error-actions">
+        <button type="button" class="btn btn-primary" (click)="goBack()">
+          Back to List
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="loadSummary(summary()?.id || 0)">
+          Try Again
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Summary Detail -->
+  @if (summary() && !isLoading()) {
+    <div class="detail-content">
+      <!-- Header -->
+      <div class="detail-header">
+        <div class="header-top">
+          <button type="button" class="btn btn-back" (click)="goBack()">
+            ← Back
+          </button>
+          <div class="header-actions">
+            <button type="button" class="btn btn-action" (click)="downloadSummary()">
+              💾 Download
+            </button>
+            <button type="button" class="btn btn-action btn-delete" (click)="deleteSummary()">
+              🗑️ Delete
+            </button>
+          </div>
+        </div>
+
+        <div class="header-info">
+          <h1 class="title">
+            <span class="icon">📄</span>
+            Summary #{{ summary()!.id }}
+          </h1>
+          <div class="metadata-row">
+            <span class="metadata-item">
+              <span class="meta-icon">📅</span>
+              {{ formatDate(summary()!.createdAt) }}
+            </span>
+            <span class="metadata-item">
+              <span class="meta-icon">🤖</span>
+              {{ summary()!.modelUsed }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-content">
+            <div class="stat-value">{{ getCompressionRatio().toFixed(1) }}%</div>
+            <div class="stat-label">Compression Ratio</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">💾</div>
+          <div class="stat-content">
+            <div class="stat-value">{{ getCharactersSaved() }}</div>
+            <div class="stat-label">Characters Saved</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">📝</div>
+          <div class="stat-content">
+            <div class="stat-value">{{ getWordCount(summary()!.originalText) }}</div>
+            <div class="stat-label">Original Words</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon">✨</div>
+          <div class="stat-content">
+            <div class="stat-value">{{ getWordCount(summary()!.summarizedText || '') }}</div>
+            <div class="stat-label">Summary Words</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Section -->
+      <div class="content-section">
+        <div class="section-header">
+          <h2>
+            <span class="section-icon">✨</span>
+            Summarized Text
+          </h2>
+          <button
+            type="button"
+            class="btn btn-copy"
+            (click)="copyToClipboard(summary()!.summarizedText!, 'summary')">
+            📋 Copy
+          </button>
+        </div>
+        <div class="summary-box">
+          <p class="summary-text">{{ summary()!.summarizedText }}</p>
+        </div>
+      </div>
+
+      <!-- Original Text Section -->
+      <div class="content-section">
+        <div class="section-header">
+          <h2>
+            <span class="section-icon">📄</span>
+            Original Text
+          </h2>
+          <button
+            type="button"
+            class="btn btn-copy"
+            (click)="copyToClipboard(summary()!.originalText, 'original')">
+            📋 Copy
+          </button>
+        </div>
+        <div class="original-box">
+          <p class="original-text">{{ summary()!.originalText }}</p>
+        </div>
+      </div>
+
+      <!-- Comparison View -->
+      <div class="comparison-section">
+        <h2 class="comparison-title">
+          <span class="section-icon">🔄</span>
+          Side-by-Side Comparison
+        </h2>
+        <div class="comparison-grid">
+          <div class="comparison-column">
+            <div class="column-header">Original ({{ summary()!.originalText.length }} chars)</div>
+            <div class="column-content">{{ summary()!.originalText }}</div>
+          </div>
+          <div class="comparison-divider"></div>
+          <div class="comparison-column">
+            <div class="column-header">Summary ({{ summary()!.summarizedText!.length }} chars)</div>
+            <div class="column-content highlight">{{ summary()!.summarizedText }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-footer">
+        <button type="button" class="btn btn-primary" (click)="createNew()">
+          ✨ Create New Summary
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="goBack()">
+          📚 View All Summaries
+        </button>
+      </div>
+    </div>
+  }
+</div>

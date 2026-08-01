@@ -1,0 +1,186 @@
+<div class="summarizer-container">
+  <div class="header">
+    <h1 class="title">
+      <span class="icon">✨</span>
+      AI Text Summarizer
+    </h1>
+    <p class="subtitle">Transform lengthy text into concise summaries using advanced AI</p>
+  </div>
+
+  <!-- Health Status -->
+  <div class="health-status" [class.checking]="healthStatus() === 'checking'" [class.connected]="healthStatus() === 'connected'" [class.disconnected]="healthStatus() === 'disconnected'">
+    <span class="status-indicator"></span>
+    @if (healthStatus() === 'checking') {
+      <span class="status-text">Checking API connection...</span>
+    } @else if (healthStatus() === 'connected') {
+      <span class="status-text">API Connected</span>
+    } @else {
+      <span class="status-text">API Disconnected - Check backend server</span>
+      <button type="button" class="btn-retry" (click)="checkHealth()" title="Retry connection">
+        🔄
+      </button>
+    }
+  </div>
+
+  <!-- Main Content -->
+  <div class="content-grid">
+    <!-- Input Section -->
+    <div class="card input-section">
+      <div class="card-header">
+        <h2>Input Text</h2>
+        <div class="text-stats">
+          <span class="stat">{{ getCharacterCount() }} characters</span>
+          <span class="stat-separator">•</span>
+          <span class="stat">{{ getWordCount() }} words</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <!-- Sample Texts -->
+        <div class="sample-texts">
+          <label class="sample-label">Quick samples:</label>
+          <div class="sample-buttons">
+            @for (sample of sampleTexts; track sample.label) {
+              <button
+                type="button"
+                class="btn btn-sample"
+                (click)="loadSampleText(sample.text)">
+                {{ sample.label }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Text Input -->
+        <textarea
+          class="text-input"
+          [value]="inputText()"
+          (input)="inputText.set($any($event.target).value)"
+          placeholder="Enter or paste your text here... (minimum 10 characters recommended)"
+          rows="12"
+        ></textarea>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="summarize()"
+            [disabled]="isLoading() || !inputText().trim()">
+            @if (isLoading()) {
+              <span class="spinner"></span>
+              <span>Summarizing...</span>
+            } @else {
+              <span>Summarize Text</span>
+            }
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="clearForm()"
+            [disabled]="isLoading()">
+            Clear
+          </button>
+        </div>
+
+        <!-- Error Message -->
+        @if (error()) {
+          <div class="alert alert-error">
+            <span class="alert-icon">⚠️</span>
+            <span>{{ error() }}</span>
+          </div>
+        }
+
+        <!-- Success Message -->
+        @if (success()) {
+          <div class="alert alert-success">
+            <span class="alert-icon">✓</span>
+            <span>Text summarized successfully!</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="card output-section">
+      <div class="card-header">
+        <h2>Summary Result</h2>
+        @if (currentSummary()) {
+          <button
+            type="button"
+            class="btn btn-icon"
+            (click)="copySummary()"
+            title="Copy to clipboard">
+            <span>📋 Copy</span>
+          </button>
+        }
+      </div>
+
+      <div class="card-body">
+        @if (currentSummary()) {
+          <div class="summary-result">
+            <!-- Summarized Text -->
+            <div class="summary-box">
+              <label class="summary-label">Summarized Text:</label>
+              <div class="summary-text">
+                {{ currentSummary()!.summarizedText }}
+              </div>
+            </div>
+
+            <!-- Original Text Preview -->
+            <div class="original-preview">
+              <label class="summary-label">Original Text:</label>
+              <div class="original-text">
+                {{ currentSummary()!.originalText }}
+              </div>
+            </div>
+
+            <!-- Metadata -->
+            <div class="summary-metadata">
+              <div class="metadata-item">
+                <span class="metadata-label">Model Used:</span>
+                <span class="metadata-value">{{ currentSummary()!.modelUsed }}</span>
+              </div>
+              @if (currentSummary()!.id) {
+                <div class="metadata-item">
+                  <span class="metadata-label">Summary ID:</span>
+                  <span class="metadata-value">#{{ currentSummary()!.id }}</span>
+                </div>
+              }
+            </div>
+
+            <!-- Compression Stats -->
+            <div class="compression-stats">
+              <div class="stat-card">
+                <div class="stat-value">
+                  {{ ((currentSummary()!.summarizedText!.length / currentSummary()!.originalText.length) * 100).toFixed(1) }}%
+                </div>
+                <div class="stat-label">Compression Ratio</div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-value">
+                  {{ currentSummary()!.originalText.length - currentSummary()!.summarizedText!.length }}
+                </div>
+                <div class="stat-label">Characters Saved</div>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <div class="empty-state">
+            <div class="empty-icon">📄</div>
+            <h3>No Summary Yet</h3>
+            <p>Enter text in the input section and click "Summarize Text" to generate a summary.</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Link -->
+  <div class="navigation-footer">
+    <a routerLink="/summaries" class="btn btn-link">
+      View All Summaries →
+    </a>
+  </div>
+</div>

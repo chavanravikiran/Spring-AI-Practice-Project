@@ -1,0 +1,180 @@
+<div class="summaries-container">
+  <div class="header">
+    <div class="header-content">
+      <h1 class="title">
+        <span class="icon">📚</span>
+        Summary History
+      </h1>
+      <button type="button" class="btn btn-primary" (click)="createNew()">
+        + New Summary
+      </button>
+    </div>
+    <p class="subtitle">View and manage all your text summaries</p>
+  </div>
+
+  <!-- Search and Filter Bar -->
+  <div class="toolbar">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Search summaries..."
+        [value]="searchTerm()"
+        (input)="onSearchChange($any($event.target).value)"
+      />
+    </div>
+
+    <div class="sort-controls">
+      <label class="sort-label">Sort by:</label>
+      <button
+        type="button"
+        class="btn btn-sort"
+        [class.active]="sortBy() === 'date'"
+        (click)="changeSortBy('date')">
+        Date
+        @if (sortBy() === 'date') {
+          <span class="sort-arrow">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+        }
+      </button>
+      <button
+        type="button"
+        class="btn btn-sort"
+        [class.active]="sortBy() === 'length'"
+        (click)="changeSortBy('length')">
+        Length
+        @if (sortBy() === 'length') {
+          <span class="sort-arrow">{{ sortOrder() === 'asc' ? '↑' : '↓' }}</span>
+        }
+      </button>
+      <button
+        type="button"
+        class="btn btn-refresh"
+        (click)="loadSummaries()"
+        [disabled]="isLoading()"
+        title="Refresh">
+        🔄
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="loading-state">
+      <div class="spinner-large"></div>
+      <p>Loading summaries...</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error() && !isLoading()) {
+    <div class="error-state">
+      <div class="error-icon">⚠️</div>
+      <h3>Error Loading Summaries</h3>
+      <p>{{ error() }}</p>
+      <button type="button" class="btn btn-primary" (click)="loadSummaries()">
+        Try Again
+      </button>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!isLoading() && !error() && filteredSummaries().length === 0 && summaries().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">📝</div>
+      <h3>No Summaries Yet</h3>
+      <p>Create your first summary to get started!</p>
+      <button type="button" class="btn btn-primary" (click)="createNew()">
+        Create First Summary
+      </button>
+    </div>
+  }
+
+  <!-- No Results State -->
+  @if (!isLoading() && !error() && filteredSummaries().length === 0 && summaries().length > 0) {
+    <div class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <h3>No Results Found</h3>
+      <p>Try adjusting your search criteria</p>
+      <button type="button" class="btn btn-secondary" (click)="onSearchChange('')">
+        Clear Search
+      </button>
+    </div>
+  }
+
+  <!-- Summaries Grid -->
+  @if (!isLoading() && !error() && filteredSummaries().length > 0) {
+    <div class="summaries-stats">
+      <span class="stat">
+        Showing {{ filteredSummaries().length }} of {{ summaries().length }} summaries
+      </span>
+    </div>
+
+    <div class="summaries-grid">
+      @for (summary of filteredSummaries(); track summary.id) {
+        <div class="summary-card" (click)="viewSummary(summary.id!)">
+          <!-- Card Header -->
+          <div class="card-header-section">
+            <div class="card-id">#{{ summary.id }}</div>
+            <div class="card-actions">
+              <button
+                type="button"
+                class="btn-icon"
+                (click)="copySummary(summary, $event)"
+                title="Copy summary">
+                📋
+              </button>
+              <button
+                type="button"
+                class="btn-icon btn-delete"
+                (click)="deleteSummary(summary.id!, $event)"
+                title="Delete summary">
+                🗑️
+              </button>
+            </div>
+          </div>
+
+          <!-- Summarized Text -->
+          <div class="summary-content">
+            <div class="summary-label">Summary</div>
+            <div class="summary-text">
+              {{ summary.summarizedText }}
+            </div>
+          </div>
+
+          <!-- Original Text Preview -->
+          <div class="original-content">
+            <div class="original-label">Original</div>
+            <div class="original-text">
+              {{ getPreviewText(summary.originalText) }}
+            </div>
+          </div>
+
+          <!-- Card Footer -->
+          <div class="card-footer">
+            <div class="footer-info">
+              <span class="info-item">
+                <span class="info-icon">🤖</span>
+                {{ summary.modelUsed }}
+              </span>
+              <span class="info-item">
+                <span class="info-icon">📅</span>
+                {{ formatDate(summary.createdAt) }}
+              </span>
+            </div>
+            <div class="compression-badge">
+              {{ ((summary.summarizedText!.length / summary.originalText.length) * 100).toFixed(0) }}% size
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Back Button -->
+  <div class="navigation-footer">
+    <a routerLink="/" class="btn btn-link">
+      ← Back to Summarizer
+    </a>
+  </div>
+</div>
