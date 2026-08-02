@@ -1,0 +1,28 @@
+{
+  "name": "Ravikiran chavan",
+  "email": "ravikiranchavan97@gmail.com",
+  "phone": "+91-89997-50015",
+  "headline": "Senior Java Backend Developer",
+  "location": "Pune",
+  "linkedin": "https://www.linkedin.com/in/ravikiran-chavan-2846b1188/",
+  "skills": [
+    "Java",
+    "Spring Boot",
+    "Spring AI",
+    "REST APIs",
+    "Kafka",
+    "PostgreSQL",
+    "Docker",
+    "Kubernetes",
+    "AWS"
+  ],
+  "experience": [
+    "5 years as a Java backend developer at Acme Corp building REST APIs with Spring Boot and PostgreSQL.",
+    "Led migration of a microservices platform to Kubernetes on AWS."
+  ],
+  "education": [
+    "MCA , Computer Application, Pune"
+  ],
+  "targetRole": "Senior Backend / Java Developer",
+  "workAuthorization": "Citizen of India"
+}
