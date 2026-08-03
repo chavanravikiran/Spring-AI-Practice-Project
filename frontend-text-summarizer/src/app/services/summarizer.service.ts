@@ -8,8 +8,13 @@ import { Summary, SummarizeRequest, DeleteResponse } from '../models/summary.mod
   providedIn: 'root'
 })
 export class SummarizerService {
+  //Local
   // private readonly API_BASE_URL = 'http://localhost:9207/api/summarizer';
-private readonly API_BASE_URL = 'http://textsummarizer.ap-south-1.elasticbeanstalk.com/api/summarizer';
+// AWS
+  // private readonly API_BASE_URL = 'http://textsummarizer.ap-south-1.elasticbeanstalk.com/api/summarizer';
+
+  //Render
+  private readonly API_BASE_URL = 'https://spring-ai-practice-project.onrender.com/api/summarizer';
   // Signals for reactive state management
   summaries = signal<Summary[]>([]);
   loading = signal<boolean>(false);
