@@ -3,25 +3,25 @@ spring:
     name: job-agent
   ai:
     ollama:
-      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      base-url: http://localhost:11434
       chat:
         options:
-          model: ${OLLAMA_MODEL:llama3.1}
+          model: llama3.1
           temperature: 0.2
 
 server:
-  port: ${PORT:8080}
+  port: 9207
 
 jobagent:
   profile:
-    path: ${PROFILE_PATH:classpath:profile.json}
+    path: classpath:profile.json
   search:
     keywords:
       - "Java Developer"
       - "Backend Engineer"
       - "Software Engineer"
-    location: ""
-    max-jobs-per-source: 20
+    location: Pune
+    max-jobs-per-source: 2
     delay-min-ms: 2000
     delay-max-ms: 5000
   analyze:
@@ -31,10 +31,10 @@ jobagent:
     auto-apply: true
     headless: true
   browser:
-    user-agent: ${USER_AGENT:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36}
-    user-data-dir: ${USER_DATA_DIR:C:\Ravikiran\Practice_Projects\Spring AI\mcp_dummy1}
+    user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
+    user-data-dir: C:\Users\Admin\AppData\Local\Google\Chrome\User Data
   storage:
-    path: ${STORAGE_PATH:data/applied-jobs.json}
+    path: data/applied-jobs.json
   run:
     cron: "0 0 9 * * MON-FRI"
     enabled: false

@@ -8,17 +8,18 @@
   "skills": [
     "Java",
     "Spring Boot",
+    "Microservices",
     "Spring AI",
     "REST APIs",
-    "Kafka",
     "PostgreSQL",
+    "Oracle",
     "Docker",
-    "Kubernetes",
-    "AWS"
+    "Jenkins",
+    "Jasper Reports"
   ],
   "experience": [
-    "5 years as a Java backend developer at Acme Corp building REST APIs with Spring Boot and PostgreSQL.",
-    "Led migration of a microservices platform to Kubernetes on AWS."
+    "5 years as a Java backend developer at Hind Industec Pvt Ltd building REST APIs with Spring Boot, Microservices, Spring AI, PostgreSQL, Oracle ",
+    "Led migration of a microservices platform"
   ],
   "education": [
     "MCA , Computer Application, Pune"

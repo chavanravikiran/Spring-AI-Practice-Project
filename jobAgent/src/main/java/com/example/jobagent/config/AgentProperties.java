@@ -17,8 +17,8 @@ public class AgentProperties {
 
     public static class Search {
         public List<String> keywords = List.of("Java Developer");
-        public String location = "";
-        public int maxJobsPerSource = 20;
+        public String location = "Pune";
+        public int maxJobsPerSource = 2;
         public int delayMinMs = 2000;
         public int delayMaxMs = 5000;
     }
