@@ -8,6 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.jobagent.model.ApplicationDraft;
 import com.example.jobagent.model.CandidateProfile;
 
@@ -15,6 +18,7 @@ public final class FormFiller {
 
     private static final Set<String> SKIP_TYPES = Set.of("hidden", "submit", "button", "checkbox", "radio", "file");
 
+    private static final Logger logger = LoggerFactory.getLogger(FormFiller.class);
     private FormFiller() {
     }
 
@@ -49,7 +53,11 @@ public final class FormFiller {
     public static WebElement findButton(WebDriver driver, String text) {
         List<WebElement> elements = driver.findElements(
                 By.xpath("//button[contains(normalize-space(.), '" + text + "')]"));
+        logger.info("----->---> kahi tr yeudet {}",elements);
+        System.out.println("----->---> kahi tr yeudet "+elements);
         for (WebElement el : elements) {
+        	logger.info("----->---> el kahi tr yeudet {} ",el);
+        	System.out.println("----->---> el kahi tr yeudet "+el);
             if (el.isDisplayed()) {
                 return el;
             }
