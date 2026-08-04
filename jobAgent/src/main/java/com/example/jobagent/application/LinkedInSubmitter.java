@@ -1,5 +1,12 @@
 package com.example.jobagent.application;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -73,23 +80,63 @@ public class LinkedInSubmitter implements ApplicationSubmitter {
 
         try {
 
-            browser.open(job.url());
+//            browser.open(job.url());
+        	browser.open("https://www.linkedin.com/jobs/");
+        	
+            System.out.println("Current URL : " + driver.getCurrentUrl());
+            System.out.println("Title       : " + driver.getTitle());
 
+            File file = new File("linkedin.html");
+            Files.writeString(file.toPath(), driver.getPageSource());
+
+            System.out.println("HTML saved to " + file.getAbsolutePath());
+
+            Files.writeString(
+            	    Path.of("linkedin.html"),
+            	    driver.getPageSource());
+            
+            System.out.println("After Selenium starts, print :----------------->"+driver.getCurrentUrl());
+            System.out.println(driver.getTitle());
+
+            if (driver.getCurrentUrl().contains("login")
+                    || driver.getPageSource().contains("Sign in")
+                    || driver.getPageSource().contains("Join now")) {
+
+                return new ApplyResult(
+                        job.id(),
+                        false,
+                        "LinkedIn Login Required");
+            }
+            
             browser.sleep(6000);
 
-            System.out.println("-------------------------------------");
-            System.out.println("Job URL     : " + driver.getCurrentUrl());
-            System.out.println("Page Title  : " + driver.getTitle());
+            System.out.println("URL   : " + driver.getCurrentUrl());
+            System.out.println("Title : " + driver.getTitle());
+
+            browser.open("https://www.linkedin.com/jobs/");
+            browser.sleep(5000);
+
+            System.out.println("Feed URL   : " + driver.getCurrentUrl());
+            System.out.println("Feed Title : " + driver.getTitle());
 
             // Print all visible buttons for debugging
-            for (WebElement button : driver.findElements(org.openqa.selenium.By.tagName("button"))) {
+//            for (WebElement button : driver.findElements(org.openqa.selenium.By.tagName("button"))) {
+//                try {
+//                    String text = button.getText().trim();
+//                    if (!text.isBlank()) {
+//                        System.out.println("Button Found : " + text);
+//                    }
+//                } catch (Exception ignored) {
+//                }
+//            }
+            List<WebElement> buttons = driver.findElements(By.tagName("button"));
+            System.out.println("========== BUTTONS ==========");
+            for (WebElement b : buttons) {
                 try {
-                    String text = button.getText().trim();
-                    if (!text.isBlank()) {
-                        System.out.println("Button Found : " + text);
-                    }
-                } catch (Exception ignored) {
-                }
+                    System.out.println(
+                        "TEXT = [" + b.getText() + "]  displayed=" +
+                        b.isDisplayed());
+                } catch (Exception ignored) {}
             }
 
             WebElement applyButton = FormFiller.findButton(driver, "Easy Apply");
@@ -113,7 +160,27 @@ public class LinkedInSubmitter implements ApplicationSubmitter {
                         "No Easy Apply / Apply button found");
             }
 
-            applyButton.click();
+//            applyButton.click();
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+
+            js.executeScript(
+                    "arguments[0].scrollIntoView({block:'center'});",
+                    applyButton);
+
+            browser.sleep(1000);
+
+            try {
+
+                applyButton.click();
+
+            }
+            catch (Exception e) {
+
+                js.executeScript(
+                        "arguments[0].click();",
+                        applyButton);
+
+            }
 
             browser.sleep(3000);
 

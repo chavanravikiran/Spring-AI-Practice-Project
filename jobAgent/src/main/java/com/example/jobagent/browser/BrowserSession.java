@@ -1,9 +1,11 @@
 package com.example.jobagent.browser;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,20 +29,60 @@ public class BrowserSession implements AutoCloseable {
 
     public synchronized WebDriver driver() {
         if (driver == null) {
-            ChromeOptions options = new ChromeOptions();
-            if (props.apply.headless) {
-                options.addArguments("--headless=new");
-            }
+//            ChromeOptions options = new ChromeOptions();
+//            options.addArguments(
+//            	    "--user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data");
+//
+//            options.addArguments("--profile-directory=Profile 1");
+//            	
+////            if (props.apply.headless) {
+////                options.addArguments("--headless=new");
+////            }
+//            options.addArguments("--disable-blink-features=AutomationControlled");
+//            options.addArguments("--window-size=1440,900");
+//            options.addArguments("--lang=en");
+//            options.addArguments("user-agent=" + props.browser.userAgent);
+//            options.addArguments("--start-maximized");
+//            options.addArguments("--remote-allow-origins=*");
+//            options.addArguments("--disable-blink-features=AutomationControlled");
+//            options.addArguments("--disable-infobars");
+////            if (props.browser.userDataDir != null && !props.browser.userDataDir.isBlank()) {
+//                options.addArguments("user-data-dir=" + props.browser.userDataDir);
+//            	options.addArguments("--user-data-dir=" + props.browser.userDataDir);
+//            	options.addArguments("--profile-directory=Profile 1");
+//            	options.addArguments("--profile-directory=Default");
+//            	options.addArguments("--user-data-dir=C:\\ChromeProfile");
+//            	options.addArguments("--profile-directory=Default");
+//
+////            }
+        	ChromeOptions options = new ChromeOptions();
+
+        	options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
+
+        	options.addArguments("--user-data-dir=C:\\ChromeProfile");
+        	options.addArguments("--profile-directory=Default");
+
+        	// DO NOT USE HEADLESS
+        	// options.addArguments("--headless=new");
+
+        	options.addArguments("--start-maximized");
+        	options.addArguments("--remote-allow-origins=*");
+        	options.addArguments("--disable-blink-features=AutomationControlled");
+        	options.addArguments("--disable-infobars");
+
+//        	WebDriver driver = new ChromeDriver(options);
+            options.setExperimentalOption(
+                    "excludeSwitches",
+                    List.of("enable-automation"));
+
+            options.setExperimentalOption(
+                    "useAutomationExtension",
+                    false);
+
             options.addArguments("--disable-blink-features=AutomationControlled");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--window-size=1440,900");
-            options.addArguments("--lang=en");
-            options.addArguments("user-agent=" + props.browser.userAgent);
-            if (props.browser.userDataDir != null && !props.browser.userDataDir.isBlank()) {
-                options.addArguments("user-data-dir=" + props.browser.userDataDir);
-            }
             driver = new ChromeDriver(options);
+            ((JavascriptExecutor) driver).executeScript(
+            		"Object.defineProperty(navigator,'webdriver',{get:()=>undefined})");
         }
         return driver;
     }
