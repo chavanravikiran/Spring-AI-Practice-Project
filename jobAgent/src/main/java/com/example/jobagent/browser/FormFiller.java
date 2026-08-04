@@ -3,14 +3,11 @@ package com.example.jobagent.browser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.example.jobagent.model.ApplicationDraft;
 import com.example.jobagent.model.CandidateProfile;
 
@@ -50,21 +47,43 @@ public final class FormFiller {
         }
     }
 
+//    public static WebElement findButton(WebDriver driver, String text) {
+//        List<WebElement> elements = driver.findElements(
+//                By.xpath("//button[contains(normalize-space(.), '" + text + "')]"));
+//        logger.info("----->---> kahi tr yeudet {}",elements);
+//        System.out.println("----->---> kahi tr yeudet "+elements);
+//        for (WebElement el : elements) {
+//        	logger.info("----->---> el kahi tr yeudet {} ",el);
+//        	System.out.println("----->---> el kahi tr yeudet "+el);
+//            if (el.isDisplayed()) {
+//                return el;
+//            }
+//        }
+//        return null;
+//    }
+
     public static WebElement findButton(WebDriver driver, String text) {
-        List<WebElement> elements = driver.findElements(
-                By.xpath("//button[contains(normalize-space(.), '" + text + "')]"));
-        logger.info("----->---> kahi tr yeudet {}",elements);
-        System.out.println("----->---> kahi tr yeudet "+elements);
-        for (WebElement el : elements) {
-        	logger.info("----->---> el kahi tr yeudet {} ",el);
-        	System.out.println("----->---> el kahi tr yeudet "+el);
-            if (el.isDisplayed()) {
-                return el;
+
+    	System.out.println(driver.getTitle());
+
+    	System.out.println(
+    	driver.findElements(By.xpath("//button")).stream()
+    	      .map(WebElement::getText)
+    	      .toList());
+    	
+        List<WebElement> buttons = driver.findElements(By.xpath(
+                "//button[contains(.,'" + text + "')]"));
+        for (WebElement b : buttons) {
+            try {
+                if (b.isDisplayed() && b.isEnabled()) {
+                    return b;
+                }
+            } catch (Exception ignored) {
             }
         }
         return null;
     }
-
+    
     private static String labelOf(WebElement el) {
         String[] attrs = {"aria-label", "name", "placeholder", "id", "title"};
         for (String attr : attrs) {

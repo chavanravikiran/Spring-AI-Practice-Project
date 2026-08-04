@@ -20,12 +20,19 @@ public class NaukriSearcher implements JobSearcher {
 	@Value("${jobagent.search.max-jobs-per-source}")
 	private int maxJobsPerSource;
 	
-    private static final String CARD_SELECTOR = ".srp-jobtuple-wrapper";
-    private static final String TITLE_SELECTOR = ".title.ellipsis";
-//    private static final String COMPANY_SELECTOR = ".subTitle.ellipsis";
-//    private static final String LOCATION_SELECTOR = ".fleft.grey-text.br2.placeHolderLi.location";
-    private static final String COMPANY_SELECTOR = "a.comp-name, .subTitle.ellipsis";
-    private static final String LOCATION_SELECTOR = ".loc-wrap, .fleft.grey-text.br2.placeHolderLi.location";
+//    private static final String CARD_SELECTOR = ".srp-jobtuple-wrapper";
+//    private static final String TITLE_SELECTOR = ".title.ellipsis";
+////    private static final String COMPANY_SELECTOR = ".subTitle.ellipsis";
+////    private static final String LOCATION_SELECTOR = ".fleft.grey-text.br2.placeHolderLi.location";
+//    private static final String COMPANY_SELECTOR = "a.comp-name, .subTitle.ellipsis";
+//    private static final String LOCATION_SELECTOR = ".loc-wrap, .fleft.grey-text.br2.placeHolderLi.location";
+	private static final String CARD_SELECTOR =  "article.jobTuple, .cust-job-tuple, div[data-job-id]";
+
+	private static final String TITLE_SELECTOR = "a.title";
+
+	private static final String COMPANY_SELECTOR = "a.comp-name";
+
+	private static final String LOCATION_SELECTOR = ".locWdth";
 
     private static final Logger log = LoggerFactory.getLogger(NaukriSearcher.class);
 
