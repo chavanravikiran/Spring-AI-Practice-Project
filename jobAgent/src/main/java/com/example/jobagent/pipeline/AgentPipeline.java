@@ -67,15 +67,31 @@ public class AgentPipeline {
 
 		List<JobAssessment> assessed = new ArrayList<>();
 		List<JobAssessment> matched = new ArrayList<>();
-		for (Job job : jobs) {
-			if (store.has(job.id())) {
-				continue;
-			}
-			JobAssessment assessment = analyzer.assess(job, profile);
-			assessed.add(assessment);
-			if (assessment.score() >= props.analyze.minScore) {
-				matched.add(assessment);
-			}
+//		for (Job job : jobs) {
+//			if (store.has(job.id())) {
+//				continue;
+//			}
+//			JobAssessment assessment = analyzer.assess(job, profile);
+//			assessed.add(assessment);
+//			if (assessment.score() >= props.analyze.minScore) {
+//				matched.add(assessment);
+//			}
+//		}
+		for(Job job : jobs){
+
+		    JobAssessment assessment =
+		            analyzer.assess(job, profile);
+
+		    System.out.println("----------------");
+		    System.out.println(job.title());
+		    System.out.println("Score = " + assessment.score());
+		    System.out.println("Reason = " + assessment.reason());
+
+		    assessed.add(assessment);
+
+		    if(assessment.score() >= props.analyze.minScore){
+		        matched.add(assessment);
+		    }
 		}
 		matched.sort(Comparator.comparingInt(JobAssessment::score).reversed());
 
@@ -85,6 +101,7 @@ public class AgentPipeline {
 		List<JobAssessment> toApply = matched.subList(0, limit);
 
 		List<ApplyResult> results = new ArrayList<>();
+		System.out.println("Matched = " + matched.size());
 		for (JobAssessment assessment : toApply) {
 			Job job = findJob(jobs, assessment.jobId());
 			if (job == null) {

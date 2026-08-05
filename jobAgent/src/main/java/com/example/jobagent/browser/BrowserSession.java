@@ -1,9 +1,9 @@
 package com.example.jobagent.browser;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -14,7 +14,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
-
 import com.example.jobagent.config.AgentProperties;
 
 @Component
@@ -29,32 +28,7 @@ public class BrowserSession implements AutoCloseable {
 
     public synchronized WebDriver driver() {
         if (driver == null) {
-//            ChromeOptions options = new ChromeOptions();
-//            options.addArguments(
-//            	    "--user-data-dir=C:\\Users\\Admin\\AppData\\Local\\Google\\Chrome\\User Data");
-//
-//            options.addArguments("--profile-directory=Profile 1");
-//            	
-////            if (props.apply.headless) {
-////                options.addArguments("--headless=new");
-////            }
-//            options.addArguments("--disable-blink-features=AutomationControlled");
-//            options.addArguments("--window-size=1440,900");
-//            options.addArguments("--lang=en");
-//            options.addArguments("user-agent=" + props.browser.userAgent);
-//            options.addArguments("--start-maximized");
-//            options.addArguments("--remote-allow-origins=*");
-//            options.addArguments("--disable-blink-features=AutomationControlled");
-//            options.addArguments("--disable-infobars");
-////            if (props.browser.userDataDir != null && !props.browser.userDataDir.isBlank()) {
-//                options.addArguments("user-data-dir=" + props.browser.userDataDir);
-//            	options.addArguments("--user-data-dir=" + props.browser.userDataDir);
-//            	options.addArguments("--profile-directory=Profile 1");
-//            	options.addArguments("--profile-directory=Default");
-//            	options.addArguments("--user-data-dir=C:\\ChromeProfile");
-//            	options.addArguments("--profile-directory=Default");
-//
-////            }
+
         	ChromeOptions options = new ChromeOptions();
 
         	options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
@@ -90,7 +64,25 @@ public class BrowserSession implements AutoCloseable {
     public void open(String url) {
         driver().get(url);
     }
+    
+    public void openInNewTab(String url) {
+        JavascriptExecutor js = (JavascriptExecutor) driver();
+        js.executeScript("window.open();");
+        List<String> tabs = new ArrayList<>(driver().getWindowHandles());
+        driver().switchTo().window(tabs.get(tabs.size() - 1));
+        System.out.println("Opening URL = " + url);
+        driver().get(url);
+        System.out.println("After get() = " + driver().getCurrentUrl());
+    }
+    public void switchToNewestTab() {
 
+        List<String> tabs = new ArrayList<>(driver().getWindowHandles());
+
+        if (!tabs.isEmpty()) {
+            driver().switchTo().window(tabs.get(tabs.size() - 1));
+        }
+    }
+    
     public WebElement waitFor(By by, long timeoutSeconds) {
         try {
             return new WebDriverWait(driver(), Duration.ofSeconds(timeoutSeconds))

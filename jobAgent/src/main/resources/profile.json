@@ -1,10 +1,59 @@
 {
-  "name": "Ravikiran chavan",
+  "firstName": "Ravikiran",
+  "lastName": "Chavan",
+  "name": "Ravikiran Chavan",
   "email": "ravikiranchavan97@gmail.com",
-  "phone": "+91-89997-50015",
+  "phone": "+91-8999750015",
+  "dateOfBirth": "27/07/1997",
+  "gender": "Male",
+
   "headline": "Senior Java Backend Developer",
+  "targetRole": "Senior Java Backend Developer",
+  "summary": "Senior Java Backend Developer with 5 years of experience in Java, Spring Boot, Microservices, Spring AI, REST APIs, PostgreSQL and Oracle.",
+
   "location": "Pune",
+  "address": "Pune",
+  "city": "Pune",
+  "state": "Maharashtra",
+  "country": "India",
+  "zipCode": "411033",
+
   "linkedin": "https://www.linkedin.com/in/ravikiran-chavan-2846b1188/",
+  "github": "https://github.com/chavanravikiran",
+  "portfolio": "https://ravikiran-portfolio.vercel.app/",
+  "website": "https://ravikiran-portfolio.vercel.app/",
+
+  "currentCompany": "Hind Industec Pvt Ltd",
+  "currentDesignation": "Senior Java Backend Developer",
+
+  "totalExperience": 5,
+  "relevantExperience": 5,
+
+  "noticePeriod": "90 Days",
+
+  "currentCTC": "1000000",
+  "expectedCTC": "1200000",
+
+  "currentSalary": "1000000",
+  "expectedSalary": "1200000",
+
+  "workAuthorization": "Citizen of India",
+  "visaStatus": "No",
+  "requireSponsorship": false,
+
+  "degree": "Master of Computer Applications (MCA)",
+  "college": "Pune University",
+  "graduationYear": "2021",
+  "cgpa": "8.1",
+
+  "resumePath": "resume.pdf",
+
+  "languages": "English, Hindi, Marathi",
+
+  "certifications": "",
+
+  "drivingLicense": "Yes",
+
   "skills": [
     "Java",
     "Spring Boot",
@@ -17,13 +66,47 @@
     "Jenkins",
     "Jasper Reports"
   ],
+
+  "skillExperience": {
+    "java": 5,
+    "spring boot": 5,
+    "microservices": 4,
+    "spring ai": 1,
+    "rest apis": 5,
+    "postgresql": 3,
+    "oracle": 4,
+    "docker": 2,
+    "jenkins": 2,
+    "jasper reports": 2
+  },
+
   "experience": [
-    "5 years as a Java backend developer at Hind Industec Pvt Ltd building REST APIs with Spring Boot, Microservices, Spring AI, PostgreSQL, Oracle ",
-    "Led migration of a microservices platform"
+    "Senior Java Backend Developer with 5 years of experience in Java, Spring Boot, Microservices, REST APIs, PostgreSQL, Oracle and Spring AI",
+    "Worked on enterprise backend applications.",
+    "Developed REST APIs.",
+    "Designed Microservices architecture.",
+    "Worked with Docker and Jenkins CI/CD."
   ],
+
   "education": [
-    "MCA , Computer Application, Pune"
+    "Master of Computer Applications (MCA)"
   ],
-  "targetRole": "Senior Backend / Java Developer",
-  "workAuthorization": "Citizen of India"
+  
+  "whyJoin": "I want to join because this role aligns with my backend engineering expertise and offers opportunities to work on scalable systems and continue growing professionally.",
+
+  "whyHire": "I bring 5 years of experience in Java backend development, strong problem-solving skills, hands-on experience with Microservices, Spring Boot and REST APIs, and a proven ability to deliver high-quality enterprise applications.",
+
+  "strength": "Strong backend development skills, problem-solving ability, quick learning, ownership, and effective collaboration.",
+
+  "weakness": "I sometimes spend extra time optimizing solutions, but I continuously work on balancing perfection with timely delivery.",
+
+  "achievement": "Successfully designed and delivered multiple enterprise backend applications and contributed to modernizing legacy systems using Microservices.",
+
+  "leadership": "I have mentored junior developers, reviewed code, and coordinated with cross-functional teams to deliver projects successfully.",
+
+  "teamWork": "I enjoy collaborating with developers, QA engineers, DevOps teams, and business stakeholders to achieve project goals.",
+
+  "motivation": "Building scalable backend systems, learning new technologies, and solving challenging engineering problems motivate me.",
+
+  "careerGoal": "To become a highly skilled backend architect and contribute to building scalable, high-performance enterprise software."
 }
