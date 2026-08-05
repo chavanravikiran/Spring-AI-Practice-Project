@@ -130,7 +130,7 @@ public class LinkedInSearcher implements JobSearcher {
 
             System.out.println("Opening : " + url);
 
-            browser.open(url);
+//            browser.open(url);
 
             browser.sleep(8000);
 
