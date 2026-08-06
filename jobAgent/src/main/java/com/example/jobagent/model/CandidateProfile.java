@@ -53,6 +53,7 @@ public record CandidateProfile(
         String college,
         String graduationYear,
         String cgpa,
+        String education,
 
         // Resume
         String resumePath,
@@ -90,7 +91,40 @@ public record CandidateProfile(
 
         String motivation,
 
-        String careerGoal
+        String careerGoal,
+        
+     // Project
+        String recentProject,
+        String currentProject,
+        String responsibilities,
+        String teamSize,
+        String projectDuration,
+
+        // Employment
+        String employmentType,
+        String department,
+        String industry,
+
+        // Salary
+        String currentFixedSalary,
+        String currentVariableSalary,
+        String currentMonthlySalary,
+
+        // Education
+        String percentage10,
+        String percentage12,
+        String graduationPercentage,
+        String postGraduationPercentage,
+
+        // Availability
+        String lastWorkingDay,
+        String expectedJoiningDate,
+
+        // Misc
+        String reasonForLeaving,
+        String conflictResolution,
+        String biggestChallenge,
+        String technologiesUsed
 		
 		) {
 }
