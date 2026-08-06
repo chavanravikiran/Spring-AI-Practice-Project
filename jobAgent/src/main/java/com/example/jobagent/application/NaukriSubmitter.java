@@ -98,7 +98,8 @@ public class NaukriSubmitter implements ApplicationSubmitter {
             }
             browser.sleep(3000);
 
-            FormFiller.fillVisibleFields(driver, draft, profile);
+//            FormFiller.fillVisibleFields(driver, draft, profile);
+            FormFiller.fillForm(driver,draft,profile);
             WebElement submit = FormFiller.findButton(driver, "Submit");
             if (submit == null) {
                 submit = FormFiller.findButton(driver, "Send");
